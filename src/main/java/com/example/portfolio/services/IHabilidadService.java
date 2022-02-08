@@ -1,6 +1,6 @@
 package com.example.portfolio.services;
 
-import com.example.portfolio.models.Habilidad;
+import com.example.portfolio.entities.Habilidad;
 
 import java.util.List;
 

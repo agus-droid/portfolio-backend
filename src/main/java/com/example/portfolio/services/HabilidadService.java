@@ -1,8 +1,7 @@
 package com.example.portfolio.services;
 
-import com.example.portfolio.models.Habilidad;
+import com.example.portfolio.entities.Habilidad;
 import com.example.portfolio.repositories.HabilidadRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +9,15 @@ import java.util.List;
 @Service
 public class HabilidadService implements IHabilidadService {
 
-    @Autowired
-    private HabilidadRepository habilidadRepository;
+    private final HabilidadRepository habilidadRepository;
+
+    public HabilidadService(HabilidadRepository habilidadRepository) {
+        this.habilidadRepository = habilidadRepository;
+    }
 
     @Override
     public List<Habilidad> getHabilidades(){
-        List<Habilidad> Habilidades = habilidadRepository.findAll();
-        return Habilidades;
+        return habilidadRepository.findAll();
     }
 
     @Override
@@ -31,7 +32,6 @@ public class HabilidadService implements IHabilidadService {
 
     @Override
     public Habilidad findHabilidad(Long id){
-        Habilidad habilidad = habilidadRepository.findById(id).orElse(null);
-        return habilidad;
+        return habilidadRepository.findById(id).orElse(null);
     }
 }
