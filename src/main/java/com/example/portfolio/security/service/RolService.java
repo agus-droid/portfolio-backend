@@ -2,7 +2,7 @@ package com.example.portfolio.security.service;
 
 import com.example.portfolio.security.entities.Rol;
 import com.example.portfolio.security.enums.RolNombre;
-import com.example.portfolio.security.repository.RolRepository;
+import com.example.portfolio.security.repositories.RolRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

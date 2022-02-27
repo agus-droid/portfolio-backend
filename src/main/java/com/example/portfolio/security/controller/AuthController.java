@@ -24,9 +24,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
-
-import static org.hibernate.sql.InFragment.NULL;
 
 @RestController
 @RequestMapping("/auth")

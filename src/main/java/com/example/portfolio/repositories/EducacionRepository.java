@@ -1,9 +1,9 @@
 package com.example.portfolio.repositories;
 
-import com.example.portfolio.entities.Habilidad;
+import com.example.portfolio.entities.Educacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HabilidadRepository extends JpaRepository<Habilidad, Long> {
+public interface EducacionRepository extends JpaRepository<Educacion, Long> {
 }

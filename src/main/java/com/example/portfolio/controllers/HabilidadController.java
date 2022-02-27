@@ -18,27 +18,27 @@ public class HabilidadController {
     }
 
 
-    @GetMapping("/habilidades")
+    @GetMapping("/habilidad")
     public List<Habilidad> getHabilidades(){
         return interfaceHabilidad.getHabilidades();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/habilidades/nueva")
+    @PostMapping("/habilidad/nueva")
     public String createHabilidad(@RequestBody Habilidad habilidad){
         interfaceHabilidad.saveHabilidad(habilidad);
         return "Habilidad registrada correctamente";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/habilidades/borrar/{id}")
+    @DeleteMapping("/habilidad/borrar/{id}")
     public String deleteHabilidad(@PathVariable Long id){
         interfaceHabilidad.deleteHabilidad(id);
         return "Habilidad eliminada correctamente";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/habilidades/editar/{id}")
+    @PutMapping("/habilidad/editar/{id}")
     public Habilidad editHabilidad(@PathVariable Long id,
                                    @RequestParam("titulo") String titulo,
                                    @RequestParam("porcentaje") double porcentaje){

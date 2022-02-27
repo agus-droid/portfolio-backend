@@ -1,7 +1,7 @@
 package com.example.portfolio.security.service;
 
 import com.example.portfolio.security.entities.Usuario;
-import com.example.portfolio.security.repository.UsuarioRepository;
+import com.example.portfolio.security.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

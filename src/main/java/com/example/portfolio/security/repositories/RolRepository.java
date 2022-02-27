@@ -1,4 +1,4 @@
-package com.example.portfolio.security.repository;
+package com.example.portfolio.security.repositories;
 
 
 import com.example.portfolio.security.entities.Rol;
