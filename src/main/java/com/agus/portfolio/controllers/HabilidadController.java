@@ -40,13 +40,12 @@ public class HabilidadController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/habilidad/editar/{id}")
     public Habilidad editHabilidad(@PathVariable Long id,
-                                   @RequestParam("titulo") String titulo,
-                                   @RequestParam("porcentaje") double porcentaje){
+                                   @RequestBody Habilidad habilidadNueva){
 
         Habilidad habilidad = interfaceHabilidad.findHabilidad(id);
 
-        habilidad.setTitulo(titulo);
-        habilidad.setPorcentaje(porcentaje);
+        habilidad.setTitulo(habilidadNueva.getTitulo());
+        habilidad.setPorcentaje(habilidadNueva.getPorcentaje());
 
         interfaceHabilidad.saveHabilidad(habilidad);
 

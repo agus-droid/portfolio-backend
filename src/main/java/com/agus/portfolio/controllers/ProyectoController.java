@@ -40,15 +40,13 @@ public class ProyectoController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/proyecto/editar/{id}")
     public Proyecto editProyecto(@PathVariable Long id,
-                                   @RequestParam("titulo") String titulo,
-                                   @RequestParam("descripcion") String descripcion,
-                                   @RequestParam("url") String url){
+                                 @RequestBody Proyecto proyectoNuevo){
 
         Proyecto proyecto = interfaceProyecto.findProyecto(id);
 
-        proyecto.setTitulo(titulo);
-        proyecto.setDescripcion(descripcion);
-        proyecto.setUrl(url);
+        proyecto.setTitulo(proyectoNuevo.getTitulo());
+        proyecto.setDescripcion(proyectoNuevo.getDescripcion());
+        proyecto.setUrl(proyectoNuevo.getUrl());
 
         interfaceProyecto.saveProyecto(proyecto);
 

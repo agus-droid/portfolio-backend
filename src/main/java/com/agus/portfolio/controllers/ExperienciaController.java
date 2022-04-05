@@ -2,10 +2,15 @@ package com.agus.portfolio.controllers;
 
 import com.agus.portfolio.entities.Experiencia;
 import com.agus.portfolio.services.IExperienciaService;
+import com.agus.portfolio.utils.FileUploadUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -25,7 +30,18 @@ public class ExperienciaController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/experiencia/nueva")
-    public String createExperiencia(@RequestBody Experiencia experiencia){
+    public String createExperiencia(@RequestParam("titulo") String titulo,
+                                    @RequestParam("descripcion") String descripcion,
+                                    @RequestParam("imagen") MultipartFile imagen,
+                                    @RequestParam("fecha") String fecha) throws IOException {
+
+        Experiencia experiencia = new Experiencia();
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(imagen.getOriginalFilename()));
+        String fileCode = FileUploadUtil.saveFile(fileName, imagen);
+        experiencia.setTitulo(titulo);
+        experiencia.setDescripcion(descripcion);
+        experiencia.setImagen(fileCode);
+        experiencia.setFecha(fecha);
         interfaceExperiencia.saveExperiencia(experiencia);
         return "Experiencia registrada correctamente";
     }
@@ -42,18 +58,17 @@ public class ExperienciaController {
     public Experiencia editExperiencia(@PathVariable Long id,
                                        @RequestParam("titulo") String titulo,
                                        @RequestParam("descripcion") String descripcion,
-                                       @RequestParam("imagen") String imagen,
-                                       @RequestParam("fecha") String fecha){
+                                       @RequestParam("imagen") MultipartFile imagen,
+                                       @RequestParam("fecha") String fecha) throws IOException {
 
         Experiencia experiencia = interfaceExperiencia.findExperiencia(id);
-
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(imagen.getOriginalFilename()));
+        String fileCode = FileUploadUtil.saveFile(fileName, imagen);
         experiencia.setTitulo(titulo);
         experiencia.setDescripcion(descripcion);
-        experiencia.setImagen(imagen);
+        experiencia.setImagen(fileCode);
         experiencia.setFecha(fecha);
-
         interfaceExperiencia.saveExperiencia(experiencia);
-
         return experiencia;
     }
 }
