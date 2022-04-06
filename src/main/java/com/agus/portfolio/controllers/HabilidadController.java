@@ -1,7 +1,10 @@
 package com.agus.portfolio.controllers;
 
+import com.agus.portfolio.dto.Mensaje;
 import com.agus.portfolio.entities.Habilidad;
 import com.agus.portfolio.services.IHabilidadService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,16 +28,16 @@ public class HabilidadController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/habilidad/nueva")
-    public String createHabilidad(@RequestBody Habilidad habilidad){
+    public ResponseEntity<?> createHabilidad(@RequestBody Habilidad habilidad){
         interfaceHabilidad.saveHabilidad(habilidad);
-        return "Habilidad registrada correctamente";
+        return new ResponseEntity(new Mensaje("Habilidad registrada correctamente"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/habilidad/borrar/{id}")
-    public String deleteHabilidad(@PathVariable Long id){
+    public ResponseEntity<?> deleteHabilidad(@PathVariable Long id){
         interfaceHabilidad.deleteHabilidad(id);
-        return "Habilidad eliminada correctamente";
+        return new ResponseEntity(new Mensaje("Habilidad eliminada correctamente"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

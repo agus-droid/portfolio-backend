@@ -1,8 +1,11 @@
 package com.agus.portfolio.controllers;
 
+import com.agus.portfolio.dto.Mensaje;
 import com.agus.portfolio.entities.Educacion;
 import com.agus.portfolio.services.IEducacionService;
 import com.agus.portfolio.utils.FileUploadUtil;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +33,7 @@ public class EducacionController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/educacion/nueva")
-    public String createEducacion(@RequestParam("titulo") String titulo,
+    public ResponseEntity<?> createEducacion(@RequestParam("titulo") String titulo,
                                   @RequestParam("descripcion") String descripcion,
                                   @RequestParam("imagen") MultipartFile imagen,
                                   @RequestParam("fecha") String fecha) throws IOException {
@@ -43,14 +46,14 @@ public class EducacionController {
         educacion.setImagen(fileCode);
         educacion.setFecha(fecha);
         interfaceEducacion.saveEducacion(educacion);
-        return "Educacion registrada correctamente";
+        return new ResponseEntity(new Mensaje("Educacion registrada correctamente"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/educacion/borrar/{id}")
-    public String deleteEducacion(@PathVariable Long id){
+    public ResponseEntity<?> deleteEducacion(@PathVariable Long id){
         interfaceEducacion.deleteEducacion(id);
-        return "Educacion eliminada correctamente";
+        return new ResponseEntity(new Mensaje("Educacion eliminada correctamente"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
