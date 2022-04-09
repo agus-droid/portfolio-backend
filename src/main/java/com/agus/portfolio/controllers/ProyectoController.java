@@ -37,7 +37,7 @@ public class ProyectoController {
     @DeleteMapping("/proyecto/borrar/{id}")
     public ResponseEntity<?> deleteProyecto(@PathVariable Long id){
         interfaceProyecto.deleteProyecto(id);
-        return new ResponseEntity(new Mensaje("Proyecto registrado correctamente"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Proyecto eliminado correctamente"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
